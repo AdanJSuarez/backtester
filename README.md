@@ -1,2 +1,3 @@
-# backtester
+# Backtester
+
 Backtester for C++

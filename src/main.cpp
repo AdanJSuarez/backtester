@@ -7,7 +7,12 @@ int main(int argc, const char** argv) {
 
     LoadData loadedData {fileName};
     RawData rawData {loadedData.getData()};
-    Data data {rawData};
+    Data data {rawData, 10};
+
+    // Develop the strategy.
+    // Run the strategy.
+    // Calculate result.
+    // Show result.
 
     return 0;
 }

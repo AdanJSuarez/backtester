@@ -21,7 +21,9 @@ RegretionRange::RegretionRange(int numOfEntry, double entryDistance, double lot,
  * @retval RawDataLine
  */
 void RegretionRange::quoteEvent(const RawDataLine &quoteEvent) {
-   if (!triggerIn(quoteEvent)) {
+   // Check if there is at least m_range ticks before check entries.
+   if (m_numOfTicks <= m_range) return;
+   else if (!triggerIn(quoteEvent)) {
        triggerOut(quoteEvent);
    };
    updateParameters(quoteEvent);
@@ -40,7 +42,7 @@ double RegretionRange::getResult() {
  * @retval None
  */
 void RegretionRange::updateParameters(const RawDataLine &quoteEvent) {
-   if (m_numOfTicks < m_range) {
+   if ((m_numOfTicks % m_range) < m_range) {
        ++m_numOfTicks;
    } else {
        m_entryPriceLong = quoteEvent.m_price + m_entryDistance;

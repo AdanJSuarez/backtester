@@ -22,7 +22,7 @@ RegretionRange::RegretionRange(int numOfEntry, double entryDistance, double lot,
  */
 void RegretionRange::quoteEvent(const RawDataLine &quoteEvent) {
    // Check if there is at least m_range ticks before check entries.
-   if (m_numOfTicks <= m_range) return;
+   if (m_numOfTicks <= m_range);
    else if (!triggerIn(quoteEvent)) {
        triggerOut(quoteEvent);
    };

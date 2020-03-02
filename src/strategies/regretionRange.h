@@ -2,6 +2,7 @@
 #define BACKTEST_SRC_STRATEGIES_REGRETIONRANGE_H
 
 #include "../data/data.h"
+#include "../backtestResult/backtestResult.h"
 
 class RegretionRange {
 

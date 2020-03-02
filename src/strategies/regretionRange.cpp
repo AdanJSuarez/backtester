@@ -1,5 +1,4 @@
 #include "regretionRange.h"
-#include "../backtestResult/backtestResult.h"
 
 /**
  * @brief  Generate an instance of RegretionRange

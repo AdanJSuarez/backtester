@@ -14,11 +14,7 @@ int main(int argc, const char** argv) {
         strategy.quoteEvent(event);
     };
     std::cout << "The result is: ";
-    std::cout<< strategy.getResult() << "/n";
-    // Develop the strategy.
-    // Pass event to regretionRange
-    // Calculate result.
-    // Show result.
+    std::cout<< strategy.getResult() << "\n";
 
     return 0;
 }

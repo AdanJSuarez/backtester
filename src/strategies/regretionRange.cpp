@@ -21,12 +21,12 @@ RegretionRange::RegretionRange(int numOfEntry, double entryDistance, double lot,
  * @retval RawDataLine
  */
 void RegretionRange::quoteEvent(const RawDataLine &quoteEvent) {
-   // Check if there is at least m_range ticks before check entries.
-   if (m_numOfTicks <= m_range);
-   else if (!triggerIn(quoteEvent)) {
-       triggerOut(quoteEvent);
-   };
-   updateParameters(quoteEvent);
+    // Check if there is at least m_range ticks before check entries.
+    if (m_numOfTicks <= m_range);
+    else if (!triggerIn(quoteEvent)) {
+        triggerOut(quoteEvent);
+    };
+    updateParameters(quoteEvent);
 }
 /**
  * @brief  Return amount of money resulted from the strategi
@@ -36,18 +36,28 @@ void RegretionRange::quoteEvent(const RawDataLine &quoteEvent) {
 double RegretionRange::getResult() {
     return m_result.getResult();
 };
+
+/**
+ * @brief  Return BacktestResult object.
+ * @note
+ * @retval
+ */
+BacktestResult RegretionRange::getBacktestResult() {
+    return m_result;
+}
 /**
  * @brief  Check if the namber of tick is bigger than the range and if so update parameters.
  * @note
  * @retval None
  */
 void RegretionRange::updateParameters(const RawDataLine &quoteEvent) {
-   if ((m_numOfTicks % m_range) < m_range) {
-       ++m_numOfTicks;
-   } else {
-       m_entryPriceLong = quoteEvent.m_price + m_entryDistance;
-       m_entryPriceShort = quoteEvent.m_price - m_entryDistance;
-   }
+    if ((m_numOfTicks % m_range) < m_range) {
+        ++m_numOfTicks;
+    } else {
+        m_entryPriceLong = quoteEvent.m_price + m_entryDistance;
+        m_entryPriceShort = quoteEvent.m_price - m_entryDistance;
+        ++m_numOfTicks;
+    }
 }
 /**
  * @brief  Simulate send an order, and update result, inventory and trigger out.
@@ -57,6 +67,8 @@ void RegretionRange::updateParameters(const RawDataLine &quoteEvent) {
 bool RegretionRange::triggerIn(const RawDataLine &quoteEvent) {
     if (m_inventory >= m_max_inventory) return false;
     if (quoteEvent.m_price > m_entryPriceLong) {
+        /////////
+        std::cout << "m_entryPriceLong: " << m_entryPriceLong << "\n"; ///////
         m_result.setInputPrice(m_entryPriceLong, true);
         m_inventory += m_lot;
         return true;

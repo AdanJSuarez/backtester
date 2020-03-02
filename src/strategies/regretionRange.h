@@ -14,13 +14,14 @@ class RegretionRange {
     double m_entryPriceShort {0.0};
     double m_lot {0.01};
     double m_inventory {0.0};
-    BacktestResult m_result;
+    BacktestResult m_result {m_lot};
     const double m_max_inventory {m_lot * 3};
 
     public:
         RegretionRange(int numOfEntry, double entryDistance, double lot, double inventory);
         void quoteEvent(const RawDataLine& quoteEvent);
         double getResult();
+        BacktestResult getBacktestResult();
     private:
         void updateParameters(const RawDataLine&);
         bool triggerIn(const RawDataLine&);

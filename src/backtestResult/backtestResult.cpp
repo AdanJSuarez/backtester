@@ -1,8 +1,8 @@
 #include "backtestResult.h"
-#include <cmath>
+#include <iostream>
 
-BacktestResult::BacktestResult() {
-    // Do nothing.
+BacktestResult::BacktestResult(const double lot) {
+    m_lot = lot;
 };
 
 void BacktestResult::setInputPrice(const double inputPrice, const bool longEntry) {
@@ -18,13 +18,16 @@ void BacktestResult::setOutputPrice(const double outputPrice) {
     } else {
         subResult = m_inputPrice - m_outputPrice;
     }
-    m_vectorOfResult.push_back(subResult);
+    std::cout << "subResult: " << subResult << "\n"; /////////
+    std::cout << "outputPrice: " << outputPrice << " " << "isLong: " << m_longEntry << "\n";
+    m_vectorOfResult.push_back(subResult * m_lot);
 };
 
 double BacktestResult::getResult() {
     double sumOfElements {0};
-    std::for_each(m_vectorOfResult.begin(), m_vectorOfResult.end(), [&] (double n) {
-        sumOfElements += n;
-    });
+    for (double element: m_vectorOfResult) {
+        std::cout << element << "\n"; ////////////
+        sumOfElements += element;
+    }
     return sumOfElements;
 }

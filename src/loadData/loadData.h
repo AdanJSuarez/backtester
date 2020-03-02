@@ -1,4 +1,5 @@
 #ifndef BACKTEST_SRC_LOADDATA_LOADDATA_H
+#define BACKTEST_SRC_LOADDATA_LOADDATA_H
 #include "../data/data.h"
 #include <string>
 

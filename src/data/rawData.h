@@ -1,4 +1,5 @@
 #ifndef BACKTESTER_SRC_DATA_RAWDATA_H
+#define BACKTESTER_SRC_DATA_RAWDATA_H
 #include <vector>
 
 struct RawDataLine {

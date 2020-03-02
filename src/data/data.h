@@ -1,4 +1,5 @@
 #ifndef BACKTESTER_SRC_DATA_DATA_H
+#define BACKTESTER_SRC_DATA_DATA_H
 #include <vector>
 #include "rawData.h"
 

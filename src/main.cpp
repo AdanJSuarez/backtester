@@ -8,9 +8,15 @@ int main(int argc, const char** argv) {
     LoadData loadedData {fileName};
     RawData rawData {loadedData.getData()};
     Data data {rawData, 10};
+    RegretionRange strategy {3, 0.03, 0.01, 0.03};
 
+    for (RawDataLine event: rawData.m_rawData) {
+        strategy.quoteEvent(event);
+    };
+    std::cout << "The result is: ";
+    std::cout<< strategy.getResult() << "/n";
     // Develop the strategy.
-    // Run the strategy.
+    // Pass event to regretionRange
     // Calculate result.
     // Show result.
 

@@ -18,8 +18,9 @@ void BacktestResult::setOutputPrice(const double outputPrice) {
     } else {
         subResult = m_inputPrice - m_outputPrice;
     }
-    std::cout << "subResult: " << subResult << "\n"; /////////
+    std::cout << "inputPrice: " << m_inputPrice <<  "\n";/////////
     std::cout << "outputPrice: " << outputPrice << " " << "isLong: " << m_longEntry << "\n";
+    std::cout << "subResult: " << subResult << "\n"; /////////
     m_vectorOfResult.push_back(subResult * m_lot);
 };
 

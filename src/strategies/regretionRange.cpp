@@ -1,4 +1,5 @@
 #include "regretionRange.h"
+#include <iostream>
 
 /**
  * @brief  Generate an instance of RegretionRange
@@ -21,12 +22,10 @@ RegretionRange::RegretionRange(int numOfEntry, double entryDistance, double lot,
  * @retval RawDataLine
  */
 void RegretionRange::quoteEvent(const RawDataLine &quoteEvent) {
-    // Check if there is at least m_range ticks before check entries.
-    if (m_numOfTicks <= m_range);
-    else if (!triggerIn(quoteEvent)) {
+    updateParameters(quoteEvent);
+    if (!triggerIn(quoteEvent)) {
         triggerOut(quoteEvent);
     };
-    updateParameters(quoteEvent);
 }
 /**
  * @brief  Return amount of money resulted from the strategi
@@ -51,7 +50,7 @@ BacktestResult RegretionRange::getBacktestResult() {
  * @retval None
  */
 void RegretionRange::updateParameters(const RawDataLine &quoteEvent) {
-    if ((m_numOfTicks % m_range) < m_range) {
+    if ((m_numOfTicks % m_range) != 0) {
         ++m_numOfTicks;
     } else {
         m_entryPriceLong = quoteEvent.m_price + m_entryDistance;
@@ -73,6 +72,8 @@ bool RegretionRange::triggerIn(const RawDataLine &quoteEvent) {
         m_inventory += m_lot;
         return true;
     } else if (quoteEvent.m_price < m_entryPriceShort) {
+        //////////
+        std::cout << "m_entryPriceShort: " << m_entryPriceShort << "\n"; ///////
         m_result.setInputPrice(m_entryPriceShort, false);
         m_inventory += m_lot;
         return true;
@@ -85,11 +86,16 @@ bool RegretionRange::triggerIn(const RawDataLine &quoteEvent) {
  * @retval
  */
 bool RegretionRange::triggerOut(const RawDataLine &quoteEvent) {
+    if (m_inventory == 0.0) return false;
     if (quoteEvent.m_price > m_entryPriceLong + m_entryDistance) {
+        printf("cc");
+        std::cout << "m_inventory" << m_inventory << "\n";
         m_result.setOutputPrice(m_entryPriceLong + m_entryDistance);
         m_inventory = 0.0;
         return true;
     } else if (quoteEvent.m_price < m_entryPriceShort - m_entryDistance) {
+        printf("zz");
+        std::cout << "m_inventory" << m_inventory << "\n";
         m_result.setOutputPrice(m_entryPriceShort - m_entryDistance);
         m_inventory = 0.0;
         return true;

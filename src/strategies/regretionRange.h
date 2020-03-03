@@ -8,14 +8,14 @@ class RegretionRange {
 
     const int m_range {10};
     int m_numOfTicks {0};
-    int m_numOfEntries {3};
+    int m_numOfEntries {1};
     double m_entryDistance {0.1};
     double m_entryPriceLong {0.0};
     double m_entryPriceShort {0.0};
     double m_lot {0.01};
     double m_inventory {0.0};
     BacktestResult m_result {m_lot};
-    const double m_max_inventory {m_lot * 3};
+    const double m_max_inventory {m_lot};
 
     public:
         RegretionRange(int numOfEntry, double entryDistance, double lot, double inventory);

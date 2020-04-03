@@ -39,7 +39,7 @@ RawData LoadData::getData() {
     return m_rawData;
 };
 /**
- * @brief  Returns a vector of strings when split a string separated by commas(,)
+ * @brief  Modifies a vector of strings when split a string separated by commas(,)
  * @note
  * @param  container: std::vector<std::string>&
  * @param  line: std::string&
